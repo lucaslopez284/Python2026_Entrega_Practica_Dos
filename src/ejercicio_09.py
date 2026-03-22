@@ -82,12 +82,11 @@ def limpieza_estados_nulos(students) -> list:
         if status is None or status.strip() == "":
             continue
         else:
-            students_new.append(student)
+            student_copy = student.copy()
+            student_copy["status"] = status.strip().title()
+            students_new.append(student_copy)
     return students_new
 
-def normalizacion_estado(students):
-    for student in students:
-        student["status"] = student["status"].title()
 
 def eliminacion_duplicados(students) -> list:
     students_order = sorted(students, key=lambda stu: stu["grade"], reverse=True)
@@ -99,8 +98,6 @@ def eliminacion_duplicados(students) -> list:
             names.add(student["name"])
     return result
 
-    
-
 def orden_alfabetico(students) -> list:
     students_new = sorted(students, key=lambda stu: stu ["name"].lower())
     return students_new
@@ -108,14 +105,12 @@ def orden_alfabetico(students) -> list:
 students_name = limpieza_nombres_nulos(students)
 students_grade = limpieza_notas_nulas(students_name)
 students_status = limpieza_nombres_nulos(students_grade)
-students_normalizado = students_status.copy()
-normalizacion_estado(students_normalizado)
-students_ok = eliminacion_duplicados(students_normalizado)
+students_ok = eliminacion_duplicados(students_status)
 students_final = orden_alfabetico(students_ok)
 print("Registros limpios de alumnos:")
-print(f"{'Nombre':<25} {'Nota':<6} {'Estado':<10}")
+print(f"{'Nombre':<20} {'Nota':<6} {'Estado':<10}")
 print("--------------------------------------------------")
 for student in students_final:
-    print(f"{student["name"]:<25} {student["grade"]:<6} {student["status"]:<10}")
+    print(f"{student["name"]:<20} {student["grade"]:<6} {student["status"]:<10}")
 print()
 print(f"Total de alumnos válidos: {len(students_final)}")
