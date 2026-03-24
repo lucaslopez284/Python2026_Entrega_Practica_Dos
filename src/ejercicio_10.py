@@ -87,11 +87,11 @@ rounds = [
 }
 ]
 
-reporte = { 'Valentina': {'puntos': 0, 'rondas_ganadas': 0, 'mejor ronda': 0, 'promedio': 0},
-      'Mateo': {'puntos': 0, 'rondas_ganadas': 0, 'mejor ronda': 0, 'promedio': 0},
-      'Camila': {'puntos': 0, 'rondas_ganadas': 0, 'mejor ronda': 0, 'promedio': 0},
-      'Santiago': {'puntos': 0, 'rondas_ganadas': 0, 'mejor ronda': 0, 'promedio': 0},
-      'Lucía': {'puntos': 0, 'rondas_ganadas': 0, 'mejor ronda': 0, 'promedio': 0}}
+reporte = { 'Valentina': {'puntos': 0, 'rondas_ganadas': 0, 'mejor_ronda': 0, 'promedio': 0},
+      'Mateo': {'puntos': 0, 'rondas_ganadas': 0, 'mejor_ronda': 0, 'promedio': 0},
+      'Camila': {'puntos': 0, 'rondas_ganadas': 0, 'mejor_ronda': 0, 'promedio': 0},
+      'Santiago': {'puntos': 0, 'rondas_ganadas': 0, 'mejor_ronda': 0, 'promedio': 0},
+      'Lucía': {'puntos': 0, 'rondas_ganadas': 0, 'mejor_ronda': 0, 'promedio': 0}}
 
 
 def puntos_por_rondas(puntos)-> int:
@@ -114,12 +114,27 @@ def tabla_posiciones_parcial(reporte):
     for jugador in reporte_en_orden:
         print(f"{posicion}- {jugador:<10} {reporte[jugador]['puntos']}")
         posicion = posicion + 1
+    print()
+
+def tabla_final(reporte):
+    reporte_en_orden = sorted(reporte, key=lambda jugador: reporte[jugador]["puntos"], reverse=True)
+    print("Tabla de posiciones final:")
+    print(f"{'Cocinero':<20} {'Puntaje':<10} {'Rondas ganadas':<20} {'Mejor ronda':<15} {'Promedio':<10}")
+    print(f"{'-'*80}")
+    for jugador in reporte_en_orden:
+        print(f"{jugador:<20} {reporte[jugador]['puntos']:<10} {reporte[jugador]['rondas_ganadas']:<20} {reporte[jugador]['mejor_ronda']:<15} {reporte[jugador]['promedio']:<20}")
+    print(f"{'-'*80}")
+
+def promedio(reporte):
+    for jugador in reporte:
+         reporte[jugador]["promedio"] = reporte[jugador]["puntos"] / 5
 
 
 
 
 
 personas = ["Valentina", "Mateo", "Camila", "Santiago", "Lucía"]
+numero_ronda = 1
 for ronda in rounds:
     puntajes_ronda = {"Valentina" : puntos_por_rondas(ronda["scores"]["Valentina"]),
                       "Mateo" : puntos_por_rondas(ronda["scores"]["Mateo"]),
@@ -128,8 +143,14 @@ for ronda in rounds:
                       "Lucía" : puntos_por_rondas(ronda["scores"]["Lucía"])}
     datos_ganador = ganador_ronda(puntajes_ronda)
     sumar_puntos(reporte,puntajes_ronda)
+    print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
     print(f"Ganador: {datos_ganador[0]} ({datos_ganador[1]} pts)")
+    reporte[datos_ganador[0]]["rondas_ganadas"] = reporte[datos_ganador[0]]["rondas_ganadas"] + 1
     tabla_posiciones_parcial(reporte)
+    numero_ronda = numero_ronda + 1
+
+promedio(reporte)
+tabla_final(reporte)
 
 
 
