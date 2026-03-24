@@ -129,6 +129,13 @@ def promedio(reporte):
     for jugador in reporte:
          reporte[jugador]["promedio"] = reporte[jugador]["puntos"] / 5
 
+def mejor_ronda(reporte, puntajes_ronda):
+    for jugador in reporte:
+         if puntajes_ronda[jugador] > reporte[jugador]["mejor_ronda"]:
+             reporte[jugador]["mejor_ronda"] = puntajes_ronda[jugador]
+         
+
+
 
 
 
@@ -148,6 +155,7 @@ for ronda in rounds:
     reporte[datos_ganador[0]]["rondas_ganadas"] = reporte[datos_ganador[0]]["rondas_ganadas"] + 1
     tabla_posiciones_parcial(reporte)
     numero_ronda = numero_ronda + 1
+    mejor_ronda(reporte, puntajes_ronda)
 
 promedio(reporte)
 tabla_final(reporte)
