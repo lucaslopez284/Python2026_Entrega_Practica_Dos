@@ -100,9 +100,9 @@ def puntos_por_rondas(puntos)-> int:
 def promedio(puntos, rondas)-> float:
     return puntos / rondas
 
-def ganador_ronda(ronda)-> tuple[str,int]:
+def ganador_ronda(ronda)-> str:
     ganador = max(ronda, key=lambda jugador: ronda[jugador])
-    return ganador, ronda[ganador]
+    return ganador
 
 def sumar_puntos(reporte, puntajes):
     for jugador in reporte:
@@ -148,11 +148,11 @@ for ronda in rounds:
                       "Camila" : puntos_por_rondas(ronda["scores"]["Camila"]),
                       "Santiago" : puntos_por_rondas(ronda["scores"]["Santiago"]),
                       "Lucía" : puntos_por_rondas(ronda["scores"]["Lucía"])}
-    datos_ganador = ganador_ronda(puntajes_ronda)
+    ganador = ganador_ronda(puntajes_ronda)
     sumar_puntos(reporte,puntajes_ronda)
     print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
-    print(f"Ganador: {datos_ganador[0]} ({datos_ganador[1]} pts)")
-    reporte[datos_ganador[0]]["rondas_ganadas"] = reporte[datos_ganador[0]]["rondas_ganadas"] + 1
+    print(f"Ganador: {ganador} ({puntajes_ronda[ganador]} pts)")
+    reporte[ganador]["rondas_ganadas"] = reporte[ganador]["rondas_ganadas"] + 1
     tabla_posiciones_parcial(reporte)
     numero_ronda = numero_ronda + 1
     mejor_ronda(reporte, puntajes_ronda)
