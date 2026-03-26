@@ -112,7 +112,7 @@ def tabla_posiciones_parcial(reporte):
     reporte_en_orden = sorted(reporte, key=lambda jugador: reporte[jugador]["puntos"], reverse=True)
     posicion = 1
     for jugador in reporte_en_orden:
-        print(f"{posicion}- {jugador:<10} {reporte[jugador]['puntos']}")
+        print(f"{posicion:>4}- {jugador:<10} {reporte[jugador]['puntos']}")
         posicion = posicion + 1
     print()
 
@@ -142,14 +142,15 @@ for ronda in rounds:
                       "Camila" : puntos_por_rondas(ronda["scores"]["Camila"]),
                       "Santiago" : puntos_por_rondas(ronda["scores"]["Santiago"]),
                       "Lucía" : puntos_por_rondas(ronda["scores"]["Lucía"])}
+
     ganador = ganador_ronda(puntajes_ronda)
     sumar_puntos(reporte,puntajes_ronda)
-    print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
-    print(f"Ganador: {ganador} ({puntajes_ronda[ganador]} pts)")
     reporte[ganador]["rondas_ganadas"] = reporte[ganador]["rondas_ganadas"] + 1
+    print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
+    print(f"{'' * 2} Ganador: {ganador:<2} ({puntajes_ronda[ganador]} pts)")
     tabla_posiciones_parcial(reporte)
-    numero_ronda = numero_ronda + 1
     mejor_ronda(reporte, puntajes_ronda)
+    numero_ronda = numero_ronda + 1
 
 promedio(reporte)
 tabla_final(reporte)
