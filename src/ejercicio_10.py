@@ -135,12 +135,6 @@ def mejor_ronda(reporte, puntajes_ronda):
              reporte[jugador]["mejor_ronda"] = puntajes_ronda[jugador]
          
 
-
-
-
-
-
-personas = ["Valentina", "Mateo", "Camila", "Santiago", "Lucía"]
 numero_ronda = 1
 for ronda in rounds:
     puntajes_ronda = {"Valentina" : puntos_por_rondas(ronda["scores"]["Valentina"]),
