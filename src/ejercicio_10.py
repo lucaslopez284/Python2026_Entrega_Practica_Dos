@@ -135,25 +135,25 @@ def mejor_ronda(reporte, puntajes_ronda):
              reporte[jugador]["mejor_ronda"] = puntajes_ronda[jugador]
          
 
-numero_ronda = 1
-for ronda in rounds:
-    puntajes_ronda = {"Valentina" : puntos_por_rondas(ronda["scores"]["Valentina"]),
-                      "Mateo" : puntos_por_rondas(ronda["scores"]["Mateo"]),
-                      "Camila" : puntos_por_rondas(ronda["scores"]["Camila"]),
-                      "Santiago" : puntos_por_rondas(ronda["scores"]["Santiago"]),
-                      "Lucía" : puntos_por_rondas(ronda["scores"]["Lucía"])}
+# numero_ronda = 1
+# for ronda in rounds:
+#     puntajes_ronda = {"Valentina" : puntos_por_rondas(ronda["scores"]["Valentina"]),
+#                       "Mateo" : puntos_por_rondas(ronda["scores"]["Mateo"]),
+#                       "Camila" : puntos_por_rondas(ronda["scores"]["Camila"]),
+#                       "Santiago" : puntos_por_rondas(ronda["scores"]["Santiago"]),
+#                       "Lucía" : puntos_por_rondas(ronda["scores"]["Lucía"])}
 
-    ganador = ganador_ronda(puntajes_ronda)
-    sumar_puntos(reporte,puntajes_ronda)
-    reporte[ganador]["rondas_ganadas"] = reporte[ganador]["rondas_ganadas"] + 1
-    print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
-    print(f"{'' * 2} Ganador: {ganador:<2} ({puntajes_ronda[ganador]} pts)")
-    tabla_posiciones_parcial(reporte)
-    mejor_ronda(reporte, puntajes_ronda)
-    numero_ronda = numero_ronda + 1
+#     ganador = ganador_ronda(puntajes_ronda)
+#     sumar_puntos(reporte,puntajes_ronda)
+#     reporte[ganador]["rondas_ganadas"] = reporte[ganador]["rondas_ganadas"] + 1
+#     print(f"Ronda {numero_ronda} - {ronda["theme"]} ")
+#     print(f"{'' * 2} Ganador: {ganador:<2} ({puntajes_ronda[ganador]} pts)")
+#     tabla_posiciones_parcial(reporte)
+#     mejor_ronda(reporte, puntajes_ronda)
+#     numero_ronda = numero_ronda + 1
 
-promedio(reporte)
-tabla_final(reporte)
+# promedio(reporte)
+# tabla_final(reporte)
 
 
 
